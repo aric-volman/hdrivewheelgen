@@ -17,9 +17,11 @@ module hub() {
                 cylinder(r = spoke_hole_r, h = spoke_width, center = true, $fn = 30);
             }
         }
-        rotate([25, 0, 0]) {
-            translate([0, -hole_offset + 0.9, bead_length-bead_offset]){
+        rotate([40, 0, 0]) {
+            translate([0, -hole_offset + 3, bead_length-bead_offset]){
+            rotate([20, 0, 0]) {
             %bead();
+            }
             }
         }
         }
