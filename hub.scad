@@ -1,5 +1,6 @@
 include <parameters.scad>
 use <bead.scad>
+
 echo("Bead Length: ", bead_length);
 module hub() {
     difference() {
@@ -26,16 +27,14 @@ module hub() {
         }
         }
     }
-    difference() {
-        cylinder(r = shaft_radius, h = spoke_thickness);
-      difference() {
-        cylinder(r = shaft_radius, h = spoke_thickness);
-        translate([0, 0, -slop]) intersection() {
-          cylinder(r = shaft_radius, h = spoke_thickness + 2*slop);
-          translate([-shaft_radius, -shaft_radius, 0]) cube([shaft_radius*2, shaft_radius*2 - spoke_hole_key, spoke_thickness + 2.5]);
+    translate ([0, 0, -spoke_thickness/2]){
+        linear_extrude(height=spoke_thickness){
+            intersection() {
+              circle(d=shaft_radius*2);
+              square([shaft_radius*2, spoke_hole_flat], center = true);
+            }
         }
-      }
-      }
-}
+     }
+    }
 }
 hub();
